@@ -12,3 +12,23 @@ class Solution {
 
     }
 }
+memoization using hashmap
+
+class Solution {
+    HashMap<TreeNode,Integer> map = new HashMap<>();
+    public int rob(TreeNode root) {
+        if(root == null) return 0;
+        if(root.left == null && root.right == null) return root.val;
+        if(map.containsKey(root)) return map.get(root);
+        int pick = root.val;
+        if(root.left != null )
+            pick += rob(root.left.left) + rob(root.left.right);
+        if(root.right != null) 
+            pick += rob(root.right.left) + rob(root.right.right);
+        int npick = rob(root.left) + rob(root.right);
+        int profit = Math.max(pick,npick);
+        map.put(root,profit);
+        return profit;
+
+    }
+}
