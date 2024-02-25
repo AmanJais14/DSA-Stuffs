@@ -1,0 +1,39 @@
+TOTAL NO. OF UNIQUE PATHS IN A GRID WITH OBSTACLES
+
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        // int dp[][] =new int[obstacleGrid.length][obstacleGrid[0].length];
+        // for(int[] row : dp) Arrays.fill(row,-1);
+        // return uniquePath(obstacleGrid.length - 1,obstacleGrid[0].length - 1, obstacleGrid,dp);
+        return tab(obstacleGrid);
+    }
+    private int uniquePath(int i,int j,int[][] obstacle, int[][] dp) {
+        if(i == 0 && j == 0 && obstacle[i][j] != 1) {
+            return 1;
+        }
+        if(i < 0 || j < 0 || obstacle[i][j] == 1) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+        int up = uniquePath(i - 1,j,obstacle,dp);
+        int left = uniquePath(i,j-1,obstacle,dp);
+        return dp[i][j] = up + left;
+    }
+    private int tab(int obstacle[][]) {
+        int dp[][] = new int[obstacle.length][obstacle[0].length];
+        
+        for(int i = 0;i < obstacle.length;i++) {
+            for(int j = 0;j < obstacle[0].length;j++) {
+                if(obstacle[i][j] == 1) dp[i][j]=0;
+                else if(i == 0 && j== 0 && obstacle[i][j] != 1){
+                    dp[i][j] = 1;
+                } 
+                else {
+                    int down = 0,right = 0;
+                    if (i - 1 >= 0) down = dp[i - 1][j];
+                    if (j - 1 >= 0) right = dp[i][j - 1];
+                    dp[i][j] = down + right;
+                }
+            }
+        }
+        return dp[obstacle.length - 1][obstacle[0].length - 1];
+    }
+}
