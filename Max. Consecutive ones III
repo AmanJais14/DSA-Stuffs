@@ -1,0 +1,28 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int count = 0;
+        int zeros = 0;
+        int maxi = 0;
+        int i = 0;
+        for(int j = i;j < nums.length && i < nums.length; j++) {
+            if(nums[j] == 1) count++;
+            else if(nums[j] == 0) {
+                if(zeros < k) {
+                    count++;
+                    zeros++;
+                }
+                else {
+                    maxi = Math.max(maxi,count);
+                    while(i < nums.length && nums[i] != 0) {
+                        i++;
+                        count--;
+                    }
+                    i++;
+                }
+            }
+        }
+        return Math.max(maxi,count);
+    }
+}
+Whenever we encounter 0, check if we can flip it or not. if not, store the count, and move the left ptr(i) till we get 0 simultaneously decrease count.Then move the left ptr 
+one more index(from where next subarray could be found).
