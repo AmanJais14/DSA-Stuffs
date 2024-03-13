@@ -1,0 +1,18 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,List<String>> map = new HashMap<>();
+        for(String s : strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String w = new String(c);
+            if(!map.containsKey(w)) map.put(w,new ArrayList<>());
+            map.get(w).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
+// create map with key as sorted string and values are list of rearrangements.
+// for each string ,convert it into sorted string and put it into map as keys.
+// if anagrams are found,after sorting if we get string already present in the map, we will add anagram into the list of particular key string
+# hack- all anagrams are same after sorting its character.
+// return all list values of map
