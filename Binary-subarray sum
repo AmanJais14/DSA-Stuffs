@@ -1,0 +1,18 @@
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        HashMap<Integer,Integer> preSum = new HashMap<>();
+        preSum.put(0,1);
+        int sum = 0;
+        int count = 0;
+        for(int n : nums) {
+            sum = sum+n;
+            if(preSum.containsKey(sum-goal)) {
+                count += preSum.get(sum-goal);
+            }
+            preSum.put(sum,preSum.getOrDefault(sum,0)+1);
+        }
+        return count;
+    }
+}
+// create map to store prefix sum and its frequency.
+//for new sum we are checing if (sum-goal) is present or not. If its present we will increase count by frequency of (sum-goal).
