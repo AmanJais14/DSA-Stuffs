@@ -13,4 +13,5 @@ class Solution {
         return min < Integer.MAX_VALUE ? min : 0;
     }
 }
-Iterate the elements of array and add it to sum, whenever sum >= target store the size,and decrease sum from left ptr i until sum < target and then add further elements to get min. subarray. Return the minimum size.
+Iterate the elements of array and add it to sum, whenever sum >= target store the size, and decrease sum from left ptr I
+until sum < target and then add further elements to get min. subarray. Return the minimum size.
