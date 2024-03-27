@@ -1,0 +1,19 @@
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        if (k <= 1) return 0;
+        int prod = 1;
+        int count = 0;
+        int l = 0;
+        for (int r = 0; r < nums.length; r++) {
+            prod = prod * nums[r];
+            while (prod >= k) {
+                prod /= nums[l];
+                l++;
+            } 
+            count += r-l+1;
+        }
+        return count;
+    }
+}
+// for any new element at right index,(if (prod < k) we increase count by length of window(inclusive), because it would form subarrays starting 
+with all the elements between left and right pointer.
